@@ -12,6 +12,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/contexts/AuthContext';
 
+export const dynamic = 'force-dynamic';
+
 const roleOptions = [
   { value: 'FOUNDER', label: 'Founder', description: 'Building a startup and leading projects' },
   { value: 'EXPERT', label: 'Expert', description: 'Mentoring and providing guidance' },
@@ -47,9 +49,9 @@ export default function SignUp() {
       }
 
       await signUp(
-        formData.email, 
-        formData.password, 
-        formData.name, 
+        formData.email,
+        formData.password,
+        formData.name,
         formData.role as 'FOUNDER' | 'EXPERT' | 'TEAM_MEMBER'
       );
 
@@ -76,7 +78,7 @@ export default function SignUp() {
         {/* Sign Up Form */}
         <div className="forward-card p-8">
           <h2 className="text-2xl font-bold text-center mb-6">Create Account</h2>
-          
+
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 flex items-center">
               <AlertCircle className="h-5 w-5 text-red-500 mr-2" />

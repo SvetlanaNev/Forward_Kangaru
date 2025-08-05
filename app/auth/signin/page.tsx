@@ -10,6 +10,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 
+export const dynamic = 'force-dynamic';
+
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -48,7 +50,7 @@ export default function SignIn() {
         {/* Sign In Form */}
         <div className="forward-card p-8">
           <h2 className="text-2xl font-bold text-center mb-6">Sign In</h2>
-          
+
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 flex items-center">
               <AlertCircle className="h-5 w-5 text-red-500 mr-2" />

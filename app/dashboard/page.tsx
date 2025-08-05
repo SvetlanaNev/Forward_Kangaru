@@ -7,6 +7,8 @@ import DashboardClient from './dashboard-client';
 import { FirebaseCollections } from '@/lib/firebase-collections';
 import { useAuth } from '@/contexts/AuthContext';
 
+export const dynamic = 'force-dynamic';
+
 export default function Dashboard() {
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,22 +18,22 @@ export default function Dashboard() {
     const fetchProjects = async () => {
       try {
         setLoading(true);
-        
+
         // Fetch all projects
         const projectsData = await FirebaseCollections.getAllProjects();
-        
+
         // For each project, fetch related data
         const projectsWithDetails = await Promise.all(
           projectsData.map(async (project) => {
             // Fetch founder details
             const founder = await FirebaseCollections.getUserById(project.founderId);
-            
+
             // Fetch daily updates
             const dailyUpdates = await FirebaseCollections.getDailyUpdatesByProject(project.id!);
-            
+
             // Fetch comments
             const comments = await FirebaseCollections.getCommentsByProject(project.id!);
-            
+
             // For now, we'll skip team members as it requires additional implementation
             return {
               ...project,
@@ -74,8 +76,8 @@ export default function Dashboard() {
 
   return (
     <AuthGuard>
-      <DashboardClient 
-        projects={projects} 
+      <DashboardClient
+        projects={projects}
         currentUser={user}
       />
     </AuthGuard>
